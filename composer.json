@@ -1,0 +1,28 @@
+{
+    "name": "istvanmolitor/blade-ui",
+    "description": "Blade UI components package",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Molitor István",
+            "email": "istvanmolitor@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Molitor\\BladeUi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Molitor\\BladeUi\\Providers\\BladeUiServiceProvider"
+            ]
+        }
+    }
+}
