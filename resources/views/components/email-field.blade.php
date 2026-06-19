@@ -1,6 +1,6 @@
-@props(['id', 'label', 'value' => null, 'required' => false, 'autofocus' => false])
+@props(['name', 'label', 'value' => null, 'required' => false, 'autofocus' => false])
 
 <div {{ $attributes->merge(['class' => 'mb-4']) }}>
-    <x-blade-ui::label :for="$id" :value="$label" />
-    <x-blade-ui::input type="email" :name="$id" :id="$id" :value="$value" :required="$required" :autofocus="$autofocus" />
+    <x-ui::label :for="$name" :value="$label" />
+    <x-ui::input type="email" :name="$name" :value="$value" :required="$required" :autofocus="$autofocus" />
 </div>
