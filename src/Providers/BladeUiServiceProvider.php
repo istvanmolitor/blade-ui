@@ -12,5 +12,6 @@ class BladeUiServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'blade-ui');
 
         Blade::componentNamespace('Molitor\\BladeUi\\View\\Components', 'ui');
+        Blade::anonymousComponentPath(__DIR__.'/../../resources/views/components', 'ui');
     }
 }
