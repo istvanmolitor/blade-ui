@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Molitor\BladeUi\View\Components;
+namespace Molitor\BladeUi\View\Components\Form;
+
+use Molitor\BladeUi\View\Components\Component;
 
 class Form extends Component
 {
@@ -10,6 +12,6 @@ class Form extends Component
         public string $action,
         public string $method = 'POST',
     ) {
-        parent::__construct('components.form');
+        parent::__construct('components.form.form');
     }
 }

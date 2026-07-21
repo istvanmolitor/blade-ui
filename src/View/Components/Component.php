@@ -13,6 +13,6 @@ class Component extends ViewComponent
 
     public function render(): View
     {
-        return template("blade-ui::{$this->view}", $this->data());
+        return view("blade-ui::{$this->view}", $this->data());
     }
 }
