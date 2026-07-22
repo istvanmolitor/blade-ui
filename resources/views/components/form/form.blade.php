@@ -2,6 +2,9 @@
 
 @php $realMethod = strtoupper($method); @endphp
 
+<x-ui::feedback.success-message />
+<x-ui::feedback.error-messages />
+
 <form action="{{ $action }}" method="{{ in_array($realMethod, ['GET', 'POST']) ? $realMethod : 'POST' }}"
     {{ $attributes }}>
     @csrf

@@ -10,7 +10,13 @@
 
     @vite(['resources/css/app.css'])
 </head>
-<body {{ $attributes->merge(['class' => 'bg-gray-50 text-gray-900 antialiased']) }}>
-    {{ $slot }}
+<body {{ $attributes->merge(['class' => 'bg-gray-50 text-gray-900 antialiased flex flex-col min-h-screen']) }}>
+    <x-ui::layout.header />
+
+    <main class="flex-1 flex items-center justify-center px-4 py-12">
+        {{ $slot }}
+    </main>
+
+    <x-ui::layout.footer />
 </body>
 </html>
