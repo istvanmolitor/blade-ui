@@ -1,0 +1,9 @@
+@props(['items' => []])
+
+<x-ui::layout.menu {{ $attributes }}>
+    @foreach ($items as $item)
+        <x-ui::layout.menu-item :href="$item->getUrl() ?? '#'">
+            {{ $item->getLabel() }}
+        </x-ui::layout.menu-item>
+    @endforeach
+</x-ui::layout.menu>

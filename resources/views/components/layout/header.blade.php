@@ -4,6 +4,8 @@
     <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <x-ui::layout.logo :text="$title" />
 
+        <x-ui::layout.main-menu />
+
         {{ $slot }}
     </div>
 </header>
