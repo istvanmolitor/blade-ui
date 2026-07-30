@@ -12,12 +12,16 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
-        "istvanmolitor/menu": "dev-main"
+        "istvanmolitor/menu": "dev-main",
+        "istvanmolitor/setting": "*@dev"
     },
     "autoload": {
         "psr-4": {
             "Molitor\\BladeUi\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
