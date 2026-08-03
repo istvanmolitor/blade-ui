@@ -12,8 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
-        "istvanmolitor/menu": "dev-main",
-        "istvanmolitor/setting": "*@dev"
+        "istvanmolitor/menu": "dev-main"
     },
     "autoload": {
         "psr-4": {

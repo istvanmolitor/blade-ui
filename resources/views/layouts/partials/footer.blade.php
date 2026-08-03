@@ -10,7 +10,7 @@
             <div>
                 <h3 class="text-slate-900 text-lg font-bold mb-4">{{ config('app.name', 'Cég Neve') }}</h3>
                 <p class="text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
-                    {{ setting('theme', 'footer_text') }}
+                    {{ config('blade-ui.footer_text') }}
                 </p>
             </div>
 
@@ -32,9 +32,9 @@
             {{-- Contact --}}
             <div>
                 <h3 class="text-slate-900 text-sm font-bold uppercase tracking-wider mb-4">Kapcsolat</h3>
-                <p class="text-sm">{{ setting('theme', 'address') }}</p>
-                <p class="text-sm mt-1">{{ setting('theme', 'phone') }}</p>
-                <p class="text-sm mt-1">{{ setting('theme', 'email') }}</p>
+                <p class="text-sm">{{ config('blade-ui.address') }}</p>
+                <p class="text-sm mt-1">{{ config('blade-ui.phone') }}</p>
+                <p class="text-sm mt-1">{{ config('blade-ui.email') }}</p>
             </div>
         </div>
 
