@@ -11,6 +11,20 @@ Blade komponens csomag: form, layout és visszajelzés (feedback) komponensek a 
 
 A csomag automatikusan regisztrálja magát a `Molitor\BladeUi\Providers\BladeUiServiceProvider` service provideren keresztül.
 
+### Publish
+
+A Blade nézetek publikálhatók a `resources/views/vendor/blade-ui` mappába, hogy testreszabhatók legyenek:
+
+```shell
+php artisan vendor:publish --tag=blade-ui-views
+```
+
+A konfigurációs fájl publikálásához:
+
+```shell
+php artisan vendor:publish --tag=blade-ui-config
+```
+
 ## Licenc
 
 MIT

@@ -16,7 +16,11 @@ class BladeUiServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/blade-ui.php' => config_path('blade-ui.php'),
-        ], 'blade-ui');
+        ], 'blade-ui-config');
+
+        $this->publishes([
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/blade-ui'),
+        ], 'blade-ui-views');
     }
 
     public function register()
