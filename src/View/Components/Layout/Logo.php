@@ -11,6 +11,7 @@ class Logo extends Component
     public function __construct(
         public ?string $text = null,
         public string $href = '/',
+        public ?string $icon = null,
     ) {
         parent::__construct('components.layout.logo');
     }

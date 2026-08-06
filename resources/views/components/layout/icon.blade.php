@@ -1,3 +1,3 @@
 @props(['name' => ''])
 
-<i {{ $attributes->class(['theme-icon', $name !== '' ? 'icon-'.$name : null]) }} aria-hidden="true"></i>
+<x-dynamic-component :component="'lucide-'.$name" {{ $attributes }} aria-hidden="true" />

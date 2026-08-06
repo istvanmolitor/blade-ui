@@ -12,7 +12,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
-        "istvanmolitor/menu": "dev-main"
+        "istvanmolitor/menu": "dev-main",
+        "mallardduck/blade-lucide-icons": "^2.0.1"
     },
     "autoload": {
         "psr-4": {

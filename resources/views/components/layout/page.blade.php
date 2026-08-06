@@ -1,4 +1,4 @@
-@props(['title' => config('app.name', 'Laravel')])
+@props(['title' => config('app.name', 'Laravel'), 'description' => null])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ $title }}</title>
+    @if ($description)
+        <meta name="description" content="{{ $description }}">
+    @endif
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body {{ $attributes->merge(['class' => 'bg-gray-50 text-gray-900 antialiased flex flex-col min-h-screen']) }}>
     <x-ui::layout.header />
 
-    <main class="flex-1 flex items-center justify-center px-4 py-12">
+    <main class="flex-1">
         {{ $slot }}
     </main>
 

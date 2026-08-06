@@ -6,16 +6,14 @@ namespace Molitor\BladeUi\View\Components\Layout;
 
 use Molitor\BladeUi\View\Components\Component;
 
-class Header extends Component
+class Page extends Component
 {
     public function __construct(
         public ?string $title = null,
-        public ?string $logoIcon = null,
-        public string $menu = 'main',
+        public ?string $description = null,
     ) {
-        parent::__construct('components.layout.header');
+        parent::__construct('components.layout.page');
 
         $this->title ??= config('blade-ui.title', config('app.name'));
-        $this->logoIcon ??= config('blade-ui.logo');
     }
 }

@@ -15,7 +15,8 @@ Ismétlődő workflow: egy sitebuildben (HTML + Tailwind, gyakran a végleges sz
 - A `packages/blade-ui` szolgáltatója (`BladeUiServiceProvider`) a csomag nézeteit a `blade-ui::` névtér alatt tölti be, és regisztrálja a `Molitor\BladeUi\View\Components` namespace-t `ui` prefixként (`<x-ui::layout.page>`, `<x-ui::form.input-field>`, stb.).
 - A komponensek két rétegűek:
   - **Blade view**: `packages/blade-ui/resources/views/components/{kategória}/{nev}.blade.php`, `@props`-szal, generikus Tailwind osztályokkal (`bg-white`, `text-gray-900`, `shadow` — soha projekt-specifikus token).
-  - **Opcionális PHP osztály** (ha logika kell, pl. adatlekérés): `packages/blade-ui/src/View/Components/{Kategória}/{Nev}.php`, `Molitor\BladeUi\View\Components\Component`-ből származik, konstruktorban `parent::__construct('components.{kategória}.{nev}')`.
+  - **PHP osztály** (mindig legyen, lásd lentebb miért): `packages/blade-ui/src/View/Components/{Kategória}/{Nev}.php`, `Molitor\BladeUi\View\Components\Component`-ből származik, konstruktorban `parent::__construct('components.{kategória}.{nev}')`.
+- **Kritikus, nem nyilvánvaló csapda:** a provider egyszerre regisztrálja a `Blade::componentNamespace(...)` (osztály-alapú feloldás, a `blade-ui::` view-névtéren keresztül) ÉS a `Blade::anonymousComponentPath(...)`-t (közvetlen fájlrendszer-útvonal a **csomag** könyvtárára). A `resources/views/vendor/blade-ui/...` publish-override **csak** az osztály-alapú (`blade-ui::` névteres) feloldásnál érvényesül. Ha egy komponensnek NINCS PHP osztálya, a `<x-ui::...>` tag az `anonymousComponentPath`-on keresztül, közvetlenül a **csomagbeli** (nem publikált) fájlt olvassa be — a publikált másolat módosításai ekkor csendben hatástalanok maradnak, hibaüzenet nélkül. Emiatt: **minden komponensnek legyen PHP osztálya**, még akkor is, ha nincs benne logika (lásd pl. `LinkButton.php`, `Menu.php` — üres konstruktortest, csak a `parent::__construct(...)` hívás) — ez az egyetlen módja annak, hogy a 3. fázisban a publish+restyle ténylegesen működjön.
 - Kategóriák jelenleg: `feedback`, `form`, `layout`, `typography`, `table` (üres, bővíthető).
 - A csomag publish tag-jei: `blade-ui-views` → `resources/views/vendor/blade-ui`, `blade-ui-config` → `config/blade-ui.php`.
 - A projekt design tokenjei (`--color-primary`, `bg-gradient-hero`, `shadow-glow`, `font-display` stb.) a **fő projekt** `resources/css/app.css` fájljában, `@theme`/`@utility` blokkokban élnek — nem a csomagban.
@@ -30,14 +31,18 @@ Cél: a sitebuild **tartalma és struktúrája** megjelenjen egy oldalon, de a c
 3. Írd meg (vagy alakítsd át) a projekt oldalát ezekkel a komponensekkel, a `blade-ui` alapértelmezett (generikus) kinézetével — ez a köztes állapot még nem fog úgy kinézni, mint a sitebuild, és ez így helyes.
 4. Menük esetén ne írj statikus HTML `<a>` listát: használd a `Molitor\Menu` csomagot (`menu()` helper / `MenuItem`) és a `<x-ui::layout.main-menu>` komponenst, hogy a menü adatvezérelt maradjon.
 
-## 2. fázis — Hiányzó komponensek pótlása a blade-ui csomagban
+## 2. fázis — Hiányzó komponensek pótlása
 
-Ha a sitebuild olyan elemet tartalmaz, amihez nincs blade-ui komponens (pl. "stat blokk", "ikonos badge", "hero szekció két oszlopban"):
+Ha a sitebuild olyan elemet tartalmaz, amihez nincs meglévő komponens (pl. "stat blokk", "ikonos badge", "hero szekció két oszlopban"):
 
-1. Hozz létre új komponenst **a csomagban** (`packages/blade-ui/resources/views/components/{kategória}/…`), a meglévő kategóriák egyikébe illesztve (vagy indokolt esetben új kategóriába).
-2. A komponens `@props`-jai a *strukturális* variánsokat fejezzék ki (pl. `columns`, `icon`, `align`), ne a konkrét projektszíneket.
-3. Csak akkor adj hozzá PHP osztályt, ha van logika (adatforrás, számítás, feltétel) — tiszta megjelenítéshez elég az anonymous blade komponens.
-4. A default stílus maradjon semleges Tailwind paletta (gray/white/blue skála), hogy más, blade-ui-t használó projektek is értelmes alapállapotot kapjanak.
+0. **Mielőtt létrehoznád, mindig kérdezd meg a felhasználót**, hogy a komponens elég általános-e ahhoz, hogy más sitebuildeknél/projekteknél is előjöhessen (→ menjen a csomagba), vagy ennek az oldalnak/projektnek a sajátja (→ maradjon a fő projektben). Fogalmazz meg egy javaslatot az alábbi heurisztika alapján, de a döntést ne hozd meg egyedül — ez mindig kérdés, nem feltételezés.
+   - Általános jelre utal: ismétlődő mintázat (kártya, hero, stat blokk, form mező, badge), nincs benne projekt-specifikus szöveg/branding a struktúrában.
+   - Projekt-specifikusra utal: egyedi, csak ezen az oldalon előforduló elrendezés, vagy erősen a projekt tartalmához/domainjéhez kötött felépítés.
+1. **Ha általános** → hozd létre a csomagban (`packages/blade-ui/resources/views/components/{kategória}/…`), a meglévő kategóriák egyikébe illesztve (vagy indokolt esetben új kategóriába).
+   **Ha nem általános** → hozd létre a fő projektben (`resources/views/components/…`), ne a csomagban.
+2. A komponens `@props`-jai a *strukturális* variánsokat fejezzék ki (pl. `columns`, `icon`, `align`), ne a konkrét projektszíneket — ez a csomagba kerülő komponensekre kötelező, a fő projektben lévőkre ajánlott.
+3. **Csomagba kerülő komponenshez mindig hozz létre PHP osztályt is**, akkor is, ha nincs benne logika — lásd a 0. pontban leírt anonymousComponentPath-csapdát. PHP osztály nélkül a komponens a 3. fázisban nem lesz restylezhető.
+4. Csomagba kerülő komponensnél a default stílus maradjon semleges Tailwind paletta (gray/white/blue skála), hogy más, blade-ui-t használó projektek is értelmes alapállapotot kapjanak.
 5. Ha a komponens szöveges tartalmat vár, add meg értelmes default propokat/slotokat, hogy a sitebuild adatait be lehessen tölteni bele.
 
 ## 3. fázis — Publish + design ráhúzása a sitebuild kinézetére
@@ -49,9 +54,11 @@ Cél: a végeredmény pixelre a sitebuild designja legyen, de a Blade-struktúra
    php artisan vendor:publish --tag=blade-ui-views
    ```
    Ez létrehozza/frissíti a `resources/views/vendor/blade-ui/components/**` fájlokat — Laravel a Blade view-feloldásnál ezeket részesíti előnyben a csomagbeli eredetivel szemben.
+   **SOSE használj `--force`-ot**, ha korábban már restylezett fájlok vannak a `resources/views/vendor/blade-ui`-ban — a `--force` felülírja a már projekt-designra igazított publikált nézeteket is a csomagbeli generikus eredetivel, csendben, visszaigazolás nélkül. `--force` nélkül a `vendor:publish` csak a még hiányzó (pl. újonnan hozzáadott komponens) fájlokat másolja be, a meglévőket békén hagyja — ez a helyes viselkedés egy már folyamatban lévő sitebuild-integrációnál. Ha mégis véletlenül `--force`-ot használtál, minden korábban restylezett fájlt újra át kell írni.
 2. **Csak a publikált másolatot** (`resources/views/vendor/blade-ui/...`) írd át a sitebuild konkrét Tailwind osztályaira és design tokenjeire (`bg-gradient-hero`, `shadow-glow`, `text-primary`, `font-display` stb.) — a `@props` szignatúra és a slot-struktúra maradjon ugyanaz, mint a csomagbeli eredetiben, hogy a komponens API ne törjön el.
 3. Ha új design token kell (szín, gradiens, betűtípus), azt a fő projekt `resources/css/app.css` `@theme`/`@utility` blokkjaiban vezesd be — soha a csomagban.
 4. Ismételd meg minden érintett komponensre/layoutra, amíg az oldal vizuálisan meg nem egyezik a sitebuilddel.
+5. **Ha egy restylezett komponens változása nem jelenik meg** annak ellenére, hogy a fájlt jól szerkeszted és `php artisan view:clear`-t is futtattál: ellenőrizd, van-e a komponensnek PHP osztálya (`packages/blade-ui/src/View/Components/...`). PHP osztály nélkül a komponens az `anonymousComponentPath`-on keresztül a csomagbeli (nem publikált) fájlt olvassa — lásd 0. pont. A fix: hozz létre neki egy PHP osztályt (lásd 2. fázis 3. pontja), utána a publish-override már működik.
 
 ## 4. fázis — Ellenőrzés
 
@@ -66,4 +73,5 @@ Cél: a végeredmény pixelre a sitebuild designja legyen, de a Blade-struktúra
 - Design token, márka-specifikus szín/gradiens/betűtípus soha ne kerüljön a `packages/blade-ui` alapértelmezett nézeteibe.
 - Új komponenst mindig a csomagban hozz létre, ne a fő projekt `resources/views`-ában — így a következő sitebuild is örökli.
 - Menü mindig `Molitor\Menu` + `<x-ui::layout.main-menu>`, sosem statikus HTML lista.
-- Ha kétséges, hogy egy elem "elég általános"-e ahhoz, hogy a csomagba kerüljön, vagy annyira egyedi, hogy maradjon a fő projektben: ha várhatóan más sitebuildeknél is előjöhet a mintázat (kártya, hero, stat blokk, form mező), menjen a csomagba; ha egyszeri, oldal-specifikus tartalom, maradhat a projekt oldal-blade fájljában.
+- Új komponens létrehozása előtt **mindig kérdezd meg a felhasználót**, hogy általános (csomagba) vagy projekt-specifikus (fő projektbe) legyen-e — ne döntsd el egyedül, még akkor sem, ha egyértelműnek tűnik.
+- **Minden csomagbeli komponensnek legyen PHP osztálya**, logika nélkül is — enélkül a publish+restyle (3. fázis) csendben nem működik. Lásd 0. pont.

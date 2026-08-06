@@ -2,7 +2,7 @@
 
 <x-ui::layout.menu {{ $attributes }}>
     @foreach ($items as $item)
-        <x-ui::layout.menu-item :href="$item->getUrl() ?? '#'">
+        <x-ui::layout.menu-item :href="$item->getUrl() ?? '#'" :active="$item->isActive()">
             {{ $item->getLabel() }}
         </x-ui::layout.menu-item>
     @endforeach
