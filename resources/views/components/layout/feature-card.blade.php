@@ -1,6 +1,5 @@
 @props([
     'icon' => null,
-    'title' => '',
     'description' => null,
     'href' => null,
     'linkLabel' => 'Bővebben',
@@ -24,7 +23,7 @@
         @endif
     @endif
 
-    <h3 class="{{ $isDark ? 'mt-4 text-xl font-semibold text-white' : 'mt-5 text-xl font-semibold text-gray-900' }}">{{ $title }}</h3>
+    <h3 class="{{ $isDark ? 'mt-4 text-xl font-semibold text-white' : 'mt-5 text-xl font-semibold text-gray-900' }}">{{ $slot }}</h3>
 
     @if ($description)
         <p class="{{ $isDark ? 'mt-1 text-sm text-white/80' : 'mt-2 text-sm text-gray-600' }}">{{ $description }}</p>
