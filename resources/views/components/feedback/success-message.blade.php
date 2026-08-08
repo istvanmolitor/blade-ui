@@ -1,5 +1,5 @@
 @if(session('success') || session('status'))
-    <div {{ $attributes->merge(['class' => 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4']) }}>
+    <x-ui::alerts.success-alert {{ $attributes }}>
         {{ session('success') ?? session('status') }}
-    </div>
+    </x-ui::alerts.success-alert>
 @endif
