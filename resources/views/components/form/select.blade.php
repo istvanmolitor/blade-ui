@@ -1,7 +1,7 @@
-@props(['disabled' => false, 'name', 'value' => null, 'options' => [], 'placeholder' => null])
+@props(['disabled' => false, 'name', 'value' => null, 'options' => [], 'placeholder' => null, 'invalid' => false])
 
 @php
-    $hasError = $errors->has($name);
+    $hasError = $invalid || $errors->has($name);
     $currentValue = old($name, $value);
 @endphp
 
@@ -9,7 +9,7 @@
     name="{{ $name }}"
     id="{{ $name }}"
     {{ $disabled ? 'disabled' : '' }}
-    {!! $attributes->merge(['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' . ($hasError ? ' border-red-500' : '')]) !!}
+    {!! $attributes->merge(['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500' . ($hasError ? ' border-red-500' : '')]) !!}
 >
     @if ($placeholder)
         <option value="" @selected($currentValue === null)>{{ $placeholder }}</option>
