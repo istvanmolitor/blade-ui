@@ -6,10 +6,10 @@ namespace Molitor\BladeUi\View\Components\Form;
 
 use Molitor\BladeUi\View\Components\Component;
 
-class TextareaField extends Component
+class Radio extends Component
 {
     public function __construct()
     {
-        parent::__construct('components.form.textarea-field');
+        parent::__construct('components.form.radio');
     }
 }

@@ -12,7 +12,7 @@ Ismétlődő workflow: egy sitebuildben (HTML + Tailwind, gyakran a végleges sz
 
 ## 0. Kiindulási állapot ebben a projektben
 
-- A `packages/blade-ui` szolgáltatója (`BladeUiServiceProvider`) a csomag nézeteit a `blade-ui::` névtér alatt tölti be, és regisztrálja a `Molitor\BladeUi\View\Components` namespace-t `ui` prefixként (`<x-ui::layout.page>`, `<x-ui::form.input-field>`, stb.).
+- A `packages/blade-ui` szolgáltatója (`BladeUiServiceProvider`) a csomag nézeteit a `blade-ui::` névtér alatt tölti be, és regisztrálja a `Molitor\BladeUi\View\Components` namespace-t `ui` prefixként (`<x-ui::layout.page>`, `<x-ui::form.fields.input>`, stb.).
 - A komponensek két rétegűek:
   - **Blade view**: `packages/blade-ui/resources/views/components/{kategória}/{nev}.blade.php`, `@props`-szal, generikus Tailwind osztályokkal (`bg-white`, `text-gray-900`, `shadow` — soha projekt-specifikus token).
   - **PHP osztály** (mindig legyen, lásd lentebb miért): `packages/blade-ui/src/View/Components/{Kategória}/{Nev}.php`, `Molitor\BladeUi\View\Components\Component`-ből származik, konstruktorban `parent::__construct('components.{kategória}.{nev}')`.
@@ -26,7 +26,7 @@ Ismétlődő workflow: egy sitebuildben (HTML + Tailwind, gyakran a végleges sz
 
 Cél: a sitebuild **tartalma és struktúrája** megjelenjen egy oldalon, de a csomag alap (nem sitebuild-specifikus) kinézetével.
 
-1. Térképezd fel a sitebuild HTML-jét szekciónként (hero, stat blokk, kártyák, form, footer stb.), és azonosítsd, melyik blade-ui komponens/layout felel meg neki (`layout.page`, `layout.card`, `layout.header`, `layout.footer`, `layout.main-menu`, `typography.h1`…`h6`, `typography.paragraph`, `form.form`, `form.input-field` stb.).
+1. Térképezd fel a sitebuild HTML-jét szekciónként (hero, stat blokk, kártyák, form, footer stb.), és azonosítsd, melyik blade-ui komponens/layout felel meg neki (`layout.page`, `layout.card`, `layout.header`, `layout.footer`, `layout.main-menu`, `typography.h1`…`h6`, `typography.paragraph`, `form.form`, `form.fields.input` stb.).
 2. Emeld ki a valós szöveges tartalmat (címek, leírások, gombfeliratok, statisztikák) — ez megy bele a komponensek slotjaiba/propjaiba, NEM a design.
 3. Írd meg (vagy alakítsd át) a projekt oldalát ezekkel a komponensekkel, a `blade-ui` alapértelmezett (generikus) kinézetével — ez a köztes állapot még nem fog úgy kinézni, mint a sitebuild, és ez így helyes.
 4. Menük esetén ne írj statikus HTML `<a>` listát: a menüelemeket a fő projektben állítsd elő (pl. saját menü-forrásból) és add át `items` propként a `<x-ui::layout.main-menu :items="$items">` komponensnek (vagy `menuItems`/`footerMenuItems` propként a `layout-shell`/`header`/`footer` komponenseknek), hogy a menü adatvezérelt maradjon. A `blade-ui` csomag maga nem függ semmilyen menü-csomagtól.

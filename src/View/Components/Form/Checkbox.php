@@ -6,10 +6,10 @@ namespace Molitor\BladeUi\View\Components\Form;
 
 use Molitor\BladeUi\View\Components\Component;
 
-class InputField extends Component
+class Checkbox extends Component
 {
     public function __construct()
     {
-        parent::__construct('components.form.input-field');
+        parent::__construct('components.form.checkbox');
     }
 }

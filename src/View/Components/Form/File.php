@@ -6,10 +6,10 @@ namespace Molitor\BladeUi\View\Components\Form;
 
 use Molitor\BladeUi\View\Components\Component;
 
-class PasswordField extends Component
+class File extends Component
 {
     public function __construct()
     {
-        parent::__construct('components.form.password-field');
+        parent::__construct('components.form.file');
     }
 }

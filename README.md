@@ -1,6 +1,6 @@
 # Blade UI
 
-Blade komponens csomag: form, layout és visszajelzés (feedback) komponensek a gyors admin/frontend fejlesztéshez (pl. `<x-blade-ui::form.input-field>`, `<x-blade-ui::layout.page>`, `<x-blade-ui::feedback.error-messages>`).
+Blade komponens csomag: form, layout és visszajelzés (feedback) komponensek a gyors admin/frontend fejlesztéshez (pl. `<x-blade-ui::form.fields.input>`, `<x-blade-ui::layout.page>`, `<x-blade-ui::feedback.error-messages>`).
 
 ## Menü integráció
 

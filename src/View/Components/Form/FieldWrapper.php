@@ -6,10 +6,10 @@ namespace Molitor\BladeUi\View\Components\Form;
 
 use Molitor\BladeUi\View\Components\Component;
 
-class EmailField extends Component
+class FieldWrapper extends Component
 {
     public function __construct()
     {
-        parent::__construct('components.form.email-field');
+        parent::__construct('components.form.field-wrapper');
     }
 }
