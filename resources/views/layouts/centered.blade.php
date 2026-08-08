@@ -1,7 +1,7 @@
 @extends('blade-ui::layouts.base')
 
 @section('body')
-    <x-ui::layout-shell>
+    <x-ui::layout-shell :menu-items="$menuItems ?? []" :footer-menu-items="$footerMenuItems ?? []">
         <x-ui::page-shell>
             <div class="sm:mx-auto sm:w-full sm:max-w-md">
                 <div class="bg-white py-8 px-4 sm:px-10">

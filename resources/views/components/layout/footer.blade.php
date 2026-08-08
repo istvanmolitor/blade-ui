@@ -2,7 +2,7 @@
     'title' => config('app.name', 'Laravel'),
     'logoIcon' => null,
     'tagline' => null,
-    'menu' => 'footer',
+    'items' => [],
     'text' => null,
 ])
 
@@ -15,11 +15,11 @@
             @endif
         </div>
 
-        @if (count(menu($menu)) > 0)
+        @if (count($items) > 0)
             <div>
                 <h4 class="text-sm font-semibold text-gray-900">Oldalak</h4>
                 <ul class="mt-3 space-y-2 text-sm text-gray-500">
-                    @foreach (menu($menu) as $item)
+                    @foreach ($items as $item)
                         <li><a href="{{ $item->getUrl() ?? '#' }}" class="hover:text-indigo-600">{{ $item->getLabel() }}</a></li>
                     @endforeach
                 </ul>

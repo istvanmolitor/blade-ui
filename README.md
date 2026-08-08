@@ -2,10 +2,9 @@
 
 Blade komponens csomag: form, layout és visszajelzés (feedback) komponensek a gyors admin/frontend fejlesztéshez (pl. `<x-blade-ui::form.input-field>`, `<x-blade-ui::layout.page>`, `<x-blade-ui::feedback.error-messages>`).
 
-## Függőségek
+## Menü integráció
 
-- `istvanmolitor/menu` – git@github.com:istvanmolitor/menu.git
-  A layout komponensek (`main-menu`, `menu`, `menu-item`) a Menu csomag `Menu`/`MenuItem` osztályait jelenítik meg.
+A csomag nem függ semmilyen menü-csomagtól. A layout komponensek (`main-menu`, `header`, `footer`) és layoutok (`layout-shell`) `items`/`menuItems`/`footerMenuItems` propokon keresztül kapják meg a menüelemeket kívülről (a befogadó projektből). Egy menüelemnek `getUrl()`, `getLabel()`, `isActive()` és (almenühöz) `getMenuItems()` metódusokkal kell rendelkeznie.
 
 ## Telepítés
 

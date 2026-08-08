@@ -12,7 +12,7 @@ class Footer extends Component
         public ?string $title = null,
         public ?string $logoIcon = null,
         public ?string $tagline = null,
-        public string $menu = 'footer',
+        public array $items = [],
         public ?string $text = null,
     ) {
         parent::__construct('components.layout.footer');

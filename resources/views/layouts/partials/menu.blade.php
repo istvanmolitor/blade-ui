@@ -1,6 +1,6 @@
 <nav class="hidden md:flex space-x-8">
     <ul class="list-none m-0 p-0 flex items-center gap-8">
-        @foreach (menu('main') as $item)
+        @foreach ($items as $item)
         @php($children = $item->getMenuItems())
         <li class="relative group">
             <a href="{{ $item->getUrl() ?? '#' }}" @if (count($children)> 0)

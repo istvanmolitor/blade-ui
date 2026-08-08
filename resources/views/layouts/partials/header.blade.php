@@ -5,7 +5,7 @@
             @include('blade-ui::layouts.partials.logo')
 
             {{-- Desktop Navigation --}}
-            @include('blade-ui::layouts.partials.menu')
+            @include('blade-ui::layouts.partials.menu', ['items' => $items ?? []])
 
             {{-- Search --}}
             @include('blade-ui::layouts.partials.search')
@@ -28,7 +28,7 @@
         </div>
 
         {{-- Mobile Navigation --}}
-        @include('blade-ui::layouts.partials.mobile-menu')
+        @include('blade-ui::layouts.partials.mobile-menu', ['items' => $items ?? []])
     </div>
 
     {{-- Content Region for custom header content --}}

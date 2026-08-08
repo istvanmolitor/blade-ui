@@ -17,7 +17,7 @@
             {{-- Quick Links --}}
             <div>
                 <h3 class="text-slate-900 text-sm font-bold uppercase tracking-wider mb-4">Linkek</h3>
-                @php($footerMenuItems = app(\Molitor\Menu\Services\MenuManager::class)->build('footer')->getMenuItems())
+                @php($footerMenuItems = $items ?? [])
                 <ul class="space-y-2 text-sm">
                     @foreach ($footerMenuItems as $item)
                         <li>

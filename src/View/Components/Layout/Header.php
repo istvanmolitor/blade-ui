@@ -11,7 +11,7 @@ class Header extends Component
     public function __construct(
         public ?string $title = null,
         public ?string $logoIcon = null,
-        public string $menu = 'main',
+        public array $items = [],
     ) {
         parent::__construct('components.layout.header');
 

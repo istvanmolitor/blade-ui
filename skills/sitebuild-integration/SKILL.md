@@ -29,7 +29,7 @@ Cél: a sitebuild **tartalma és struktúrája** megjelenjen egy oldalon, de a c
 1. Térképezd fel a sitebuild HTML-jét szekciónként (hero, stat blokk, kártyák, form, footer stb.), és azonosítsd, melyik blade-ui komponens/layout felel meg neki (`layout.page`, `layout.card`, `layout.header`, `layout.footer`, `layout.main-menu`, `typography.h1`…`h6`, `typography.paragraph`, `form.form`, `form.input-field` stb.).
 2. Emeld ki a valós szöveges tartalmat (címek, leírások, gombfeliratok, statisztikák) — ez megy bele a komponensek slotjaiba/propjaiba, NEM a design.
 3. Írd meg (vagy alakítsd át) a projekt oldalát ezekkel a komponensekkel, a `blade-ui` alapértelmezett (generikus) kinézetével — ez a köztes állapot még nem fog úgy kinézni, mint a sitebuild, és ez így helyes.
-4. Menük esetén ne írj statikus HTML `<a>` listát: használd a `Molitor\Menu` csomagot (`menu()` helper / `MenuItem`) és a `<x-ui::layout.main-menu>` komponenst, hogy a menü adatvezérelt maradjon.
+4. Menük esetén ne írj statikus HTML `<a>` listát: a menüelemeket a fő projektben állítsd elő (pl. saját menü-forrásból) és add át `items` propként a `<x-ui::layout.main-menu :items="$items">` komponensnek (vagy `menuItems`/`footerMenuItems` propként a `layout-shell`/`header`/`footer` komponenseknek), hogy a menü adatvezérelt maradjon. A `blade-ui` csomag maga nem függ semmilyen menü-csomagtól.
 
 ## 2. fázis — Hiányzó komponensek pótlása
 
@@ -72,6 +72,6 @@ Cél: a végeredmény pixelre a sitebuild designja legyen, de a Blade-struktúra
 - **Csomag = struktúra + generikus design.** Fő projekt (publikált nézetek) = az adott sitebuild konkrét kinézete.
 - Design token, márka-specifikus szín/gradiens/betűtípus soha ne kerüljön a `packages/blade-ui` alapértelmezett nézeteibe.
 - Új komponenst mindig a csomagban hozz létre, ne a fő projekt `resources/views`-ában — így a következő sitebuild is örökli.
-- Menü mindig `Molitor\Menu` + `<x-ui::layout.main-menu>`, sosem statikus HTML lista.
+- Menü mindig kívülről átadott `items` prop + `<x-ui::layout.main-menu>`, sosem statikus HTML lista, és sosem menü-csomag közvetlen hivatkozása a csomagból.
 - Új komponens létrehozása előtt **mindig kérdezd meg a felhasználót**, hogy általános (csomagba) vagy projekt-specifikus (fő projektbe) legyen-e — ne döntsd el egyedül, még akkor sem, ha egyértelműnek tűnik.
 - **Minden csomagbeli komponensnek legyen PHP osztálya**, logika nélkül is — enélkül a publish+restyle (3. fázis) csendben nem működik. Lásd 0. pont.
