@@ -39,14 +39,14 @@
             @if ($primaryLabel || $secondaryLabel)
                 <div class="mt-8 flex flex-wrap gap-3">
                     @if ($primaryLabel)
-                        <a href="{{ $primaryHref }}" class="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105">
+                        <x-ui::buttons.primary-button :href="$primaryHref" size="lg">
                             {{ $primaryLabel }} <x-ui::layout.icon name="arrow-right" class="h-4 w-4" />
-                        </a>
+                        </x-ui::buttons.primary-button>
                     @endif
                     @if ($secondaryLabel)
-                        <a href="{{ $secondaryHref }}" class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-100">
+                        <x-ui::buttons.secondary-button :href="$secondaryHref" size="lg">
                             {{ $secondaryLabel }}
-                        </a>
+                        </x-ui::buttons.secondary-button>
                     @endif
                 </div>
             @endif

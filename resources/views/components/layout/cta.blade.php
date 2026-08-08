@@ -5,8 +5,8 @@
     @if ($description)
         <p class="mt-3 text-gray-600">{{ $description }}</p>
     @endif
-    <a href="{{ $href }}" class="mt-8 inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105">
+    <x-ui::buttons.primary-button :href="$href" size="lg" class="mt-8">
         {{ $buttonLabel }}
         <x-ui::layout.icon name="arrow-right" class="h-4 w-4" />
-    </a>
+    </x-ui::buttons.primary-button>
 </section>
