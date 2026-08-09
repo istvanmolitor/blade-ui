@@ -8,6 +8,7 @@ use Molitor\BladeUi\Http\Controllers\ComponentShowcaseController;
 Route::get('/', [ComponentShowcaseController::class, 'index'])->name('index');
 Route::get('/alerts', [ComponentShowcaseController::class, 'alerts'])->name('alerts');
 Route::get('/buttons', [ComponentShowcaseController::class, 'buttons'])->name('buttons');
+Route::get('/card', [ComponentShowcaseController::class, 'card'])->name('card');
 Route::get('/feedback', [ComponentShowcaseController::class, 'feedback'])->name('feedback');
 Route::get('/form', [ComponentShowcaseController::class, 'form'])->name('form');
 Route::get('/layout', [ComponentShowcaseController::class, 'layout'])->name('layout');

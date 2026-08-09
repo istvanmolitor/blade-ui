@@ -18,6 +18,7 @@ class ComponentShowcaseController extends Controller
     private const SECTIONS = [
         'blade-ui.showcase.alerts' => 'Alertek',
         'blade-ui.showcase.buttons' => 'Gombok',
+        'blade-ui.showcase.card' => 'Kártyák',
         'blade-ui.showcase.feedback' => 'Visszajelzések',
         'blade-ui.showcase.form' => 'Űrlapok',
         'blade-ui.showcase.layout' => 'Layout',
@@ -48,6 +49,11 @@ class ComponentShowcaseController extends Controller
     public function buttons(): View
     {
         return view('blade-ui::showcase.buttons');
+    }
+
+    public function card(): View
+    {
+        return view('blade-ui::showcase.card');
     }
 
     public function feedback(): View
