@@ -36,24 +36,24 @@ class ComponentShowcaseController extends Controller
 
     public function index(): View
     {
-        return view('blade-ui::showcase.index', [
+        return view('blade-ui::pages.index', [
             'sections' => self::SECTIONS,
         ]);
     }
 
     public function alerts(): View
     {
-        return view('blade-ui::showcase.alerts');
+        return view('blade-ui::pages.alerts');
     }
 
     public function buttons(): View
     {
-        return view('blade-ui::showcase.buttons');
+        return view('blade-ui::pages.buttons');
     }
 
     public function card(): View
     {
-        return view('blade-ui::showcase.card');
+        return view('blade-ui::pages.card');
     }
 
     public function feedback(): View
@@ -67,12 +67,12 @@ class ComponentShowcaseController extends Controller
             'email' => ['Az email mező kötelező.', 'Az email mező formátuma érvénytelen.'],
         ]));
 
-        return view('blade-ui::showcase.feedback');
+        return view('blade-ui::pages.feedback');
     }
 
     public function form(): View
     {
-        return view('blade-ui::showcase.form', [
+        return view('blade-ui::pages.form', [
             'countries' => [
                 'hu' => 'Magyarország',
                 'de' => 'Németország',
@@ -89,18 +89,18 @@ class ComponentShowcaseController extends Controller
             new DemoMenuItem('Kapcsolat', '#'),
         ];
 
-        return view('blade-ui::showcase.layout', [
+        return view('blade-ui::pages.layout', [
             'menuItems' => $menuItems,
         ]);
     }
 
     public function list(): View
     {
-        return view('blade-ui::showcase.list');
+        return view('blade-ui::pages.list');
     }
 
     public function typography(): View
     {
-        return view('blade-ui::showcase.typography');
+        return view('blade-ui::pages.typography');
     }
 }

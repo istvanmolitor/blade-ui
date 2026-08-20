@@ -1,4 +1,4 @@
-@extends('blade-ui::showcase.partials.wrapper')
+@extends('blade-ui::layouts.demo')
 
 @section('title', 'Gombok')
 @section('description', 'components/buttons &mdash; a csomagban elérhető gombvariánsok.')

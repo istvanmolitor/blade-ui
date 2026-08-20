@@ -1,4 +1,4 @@
-@extends('blade-ui::showcase.partials.wrapper')
+@extends('blade-ui::layouts.demo')
 
 @section('title', 'Visszajelzések')
 @section('description', 'components/feedback &mdash; session flash és validációs hibaüzenetek.')

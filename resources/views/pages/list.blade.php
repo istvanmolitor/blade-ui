@@ -1,4 +1,4 @@
-@extends('blade-ui::showcase.partials.wrapper')
+@extends('blade-ui::layouts.demo')
 
 @section('title', 'Listák')
 @section('description', 'components/list &mdash; checklist és lépés (step) listák.')

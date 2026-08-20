@@ -1,4 +1,4 @@
-@extends('blade-ui::showcase.partials.wrapper')
+@extends('blade-ui::layouts.demo')
 
 @section('title', 'Layout')
 @section('description', 'components/layout &mdash; oldalépítő komponensek.')

@@ -1,4 +1,4 @@
-@extends('blade-ui::showcase.partials.wrapper')
+@extends('blade-ui::layouts.demo')
 
 @section('title', 'Alertek')
 @section('description', 'components/alerts &mdash; visszajelző üzenetsávok.')

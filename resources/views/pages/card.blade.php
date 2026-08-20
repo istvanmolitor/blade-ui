@@ -1,4 +1,4 @@
-@extends('blade-ui::showcase.partials.wrapper')
+@extends('blade-ui::layouts.demo')
 
 @section('title', 'Kártyák')
 @section('description', 'components/card &mdash; összetehető kártya komponensek (header, body, footer).')
