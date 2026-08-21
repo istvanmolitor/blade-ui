@@ -1,3 +1,5 @@
+@props(['items' => []])
+
 <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 py-3">
     <div class="flex flex-col space-y-1">
         <ul class="list-none m-0 p-0 space-y-2">

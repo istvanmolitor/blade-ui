@@ -1,3 +1,5 @@
+@props(['items' => []])
+
 <footer class="bg-white text-slate-600 mt-auto border-t border-slate-100">
     {{-- Content Region for custom footer content --}}
     <div class="bg-slate-50 py-4">
@@ -17,9 +19,8 @@
             {{-- Quick Links --}}
             <div>
                 <h3 class="text-slate-900 text-sm font-bold uppercase tracking-wider mb-4">Linkek</h3>
-                @php($footerMenuItems = $items ?? [])
                 <ul class="space-y-2 text-sm">
-                    @foreach ($footerMenuItems as $item)
+                    @foreach ($items as $item)
                         <li>
                             <a href="{{ $item->getUrl() ?? '#' }}" class="hover:text-slate-900 transition-colors">
                                 {{ $item->getLabel() }}
