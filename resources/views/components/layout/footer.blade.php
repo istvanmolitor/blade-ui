@@ -1,3 +1,9 @@
+@use('Molitor\BladeUi\Support\MenuItem')
+
+@php
+    $footerMenuItems = MenuItem::collectionFromConfig('footer');
+@endphp
+
 <footer class="bg-white text-slate-600 mt-auto border-t border-slate-100">
     {{-- Content Region for custom footer content --}}
     <div class="bg-slate-50 py-4">
@@ -17,7 +23,7 @@
             {{-- Quick Links --}}
             <div>
                 <h3 class="text-slate-900 text-sm font-bold uppercase tracking-wider mb-4">Linkek</h3>
-                <x-ui::menu.footer-menu />
+                <x-ui::menu.footer-menu :items="$footerMenuItems" />
             </div>
 
             {{-- Contact --}}

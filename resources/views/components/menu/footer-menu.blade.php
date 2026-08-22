@@ -1,8 +1,4 @@
-@use('Molitor\BladeUi\Support\MenuItem')
-
-@php
-    $items = MenuItem::collectionFromConfig('footer');
-@endphp
+@props(['items'])
 
 <ul class="space-y-2 text-sm">
     @foreach ($items as $item)

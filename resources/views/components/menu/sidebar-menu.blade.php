@@ -1,6 +1,4 @@
-@php
-    $items = MenuItem::collectionFromConfig('sidebar');
-@endphp
+@props(['items'])
 
 @if($items)
     <nav>

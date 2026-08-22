@@ -1,8 +1,4 @@
-@use('Molitor\BladeUi\Support\MenuItem')
-
-@php
-    $items = MenuItem::collectionFromConfig('main');
-@endphp
+@props(['items'])
 
 <nav class="hidden md:flex space-x-8">
     <ul class="list-none m-0 p-0 flex items-center gap-8">

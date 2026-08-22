@@ -1,8 +1,4 @@
-@use('Molitor\BladeUi\Support\MenuItem')
-
-@php
-    $items = MenuItem::collectionFromConfig('main');
-@endphp
+@props(['items'])
 
 <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 py-3">
     <div class="flex flex-col space-y-1">
