@@ -4,15 +4,23 @@
 @section('description', 'components/feedback &mdash; session flash és validációs hibaüzenetek.')
 
 @section('content')
-    <div class="space-y-10">
-        <div>
-            <p class="mb-2 text-sm font-semibold text-gray-500">&lt;x-ui::feedback.success-message /&gt; &mdash; session('success')/session('status') alapján</p>
-            <x-ui::feedback.success-message />
-        </div>
+    @php
+        $successMessageCode = <<<'BLADE'
+<x-ui::feedback.success-message />
+BLADE;
 
-        <div>
-            <p class="mb-2 text-sm font-semibold text-gray-500">&lt;x-ui::feedback.error-messages /&gt; &mdash; a $errors változó alapján</p>
+        $errorMessagesCode = <<<'BLADE'
+<x-ui::feedback.error-messages />
+BLADE;
+    @endphp
+
+    <div class="space-y-10">
+        <x-ui::demo.example label="Sikeres visszajelzés (session alapján)" :code="$successMessageCode">
+            <x-ui::feedback.success-message />
+        </x-ui::demo.example>
+
+        <x-ui::demo.example label="Hibaüzenetek ($errors alapján)" :code="$errorMessagesCode">
             <x-ui::feedback.error-messages />
-        </div>
+        </x-ui::demo.example>
     </div>
 @endsection
