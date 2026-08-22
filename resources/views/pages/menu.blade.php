@@ -21,6 +21,14 @@ BLADE;
         $footerMenuCode = <<<'BLADE'
 <x-ui::menu.footer-menu :items="$footerItems" />
 BLADE;
+
+        $tabMenuCode = <<<'BLADE'
+<x-ui::menu.tab-menu :items="$tabItems" />
+BLADE;
+
+        $verticalTabMenuCode = <<<'BLADE'
+<x-ui::menu.vertical-tab-menu :items="$tabItems" />
+BLADE;
     @endphp
 
     <div class="grid gap-10">
@@ -51,6 +59,20 @@ BLADE;
         <div>
             <x-ui::demo.example label="Lábléc menü" :code="$footerMenuCode" class="max-w-xs">
                 <x-ui::menu.footer-menu :items="$footerItems" />
+            </x-ui::demo.example>
+        </div>
+
+        <div>
+            <p class="mb-3 text-xs text-gray-400">Vízszintes fül (tab) menü, aláhúzott aktív állapottal.</p>
+            <x-ui::demo.example label="Tab menü (vízszintes)" :code="$tabMenuCode">
+                <x-ui::menu.tab-menu :items="$tabItems" />
+            </x-ui::demo.example>
+        </div>
+
+        <div>
+            <p class="mb-3 text-xs text-gray-400">Függőleges fül (tab) menü, kiemelt aktív állapottal.</p>
+            <x-ui::demo.example label="Tab menü (függőleges)" :code="$verticalTabMenuCode" class="max-w-xs">
+                <x-ui::menu.vertical-tab-menu :items="$tabItems" />
             </x-ui::demo.example>
         </div>
     </div>

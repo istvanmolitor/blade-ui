@@ -147,10 +147,18 @@ class ComponentShowcaseController extends Controller
             ],
         ]);
 
+        $tabItems = MenuItem::collectionFromArray([
+            ['label' => 'Áttekintés', 'url' => '#', 'icon' => 'layout-dashboard', 'active' => true],
+            ['label' => 'Előfizetés', 'url' => '#', 'icon' => 'credit-card'],
+            ['label' => 'Csapat', 'url' => '#', 'icon' => 'users'],
+            ['label' => 'Integrációk', 'url' => '#', 'icon' => 'plug'],
+        ]);
+
         return view('blade-ui::pages.menu', [
             'items' => $items,
             'sidebarItems' => $sidebarItems,
             'footerItems' => $footerItems,
+            'tabItems' => $tabItems,
         ]);
     }
 
