@@ -1,8 +1,6 @@
-@props(['menuItems' => [], 'footerMenuItems' => []])
-
-<x-ui::layout.partials.header :items="$menuItems" />
+<x-ui::layout.header />
 @yield('top')
 {{ $slot }}
 @yield('bottom')
-<x-ui::layout.partials.footer :items="$footerMenuItems" />
+<x-ui::layout.footer />
 @yield('script')

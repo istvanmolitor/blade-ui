@@ -17,7 +17,7 @@ Ismétlődő workflow: egy sitebuildben (HTML + Tailwind, gyakran a végleges sz
   - **Blade view**: `packages/blade-ui/resources/views/components/{kategória}/{nev}.blade.php`, `@props`-szal, generikus Tailwind osztályokkal (`bg-white`, `text-gray-900`, `shadow` — soha projekt-specifikus token).
   - **PHP osztály** (mindig legyen, lásd lentebb miért): `packages/blade-ui/src/View/Components/{Kategória}/{Nev}.php`, `Molitor\BladeUi\View\Components\Component`-ből származik, konstruktorban `parent::__construct('components.{kategória}.{nev}')`.
 - **Kritikus, nem nyilvánvaló csapda:** a provider egyszerre regisztrálja a `Blade::componentNamespace(...)` (osztály-alapú feloldás, a `blade-ui::` view-névtéren keresztül) ÉS a `Blade::anonymousComponentPath(...)`-t (közvetlen fájlrendszer-útvonal a **csomag** könyvtárára). A `resources/views/vendor/blade-ui/...` publish-override **csak** az osztály-alapú (`blade-ui::` névteres) feloldásnál érvényesül. Ha egy komponensnek NINCS PHP osztálya, a `<x-ui::...>` tag az `anonymousComponentPath`-on keresztül, közvetlenül a **csomagbeli** (nem publikált) fájlt olvassa be — a publikált másolat módosításai ekkor csendben hatástalanok maradnak, hibaüzenet nélkül. Emiatt: **minden komponensnek legyen PHP osztálya**, még akkor is, ha nincs benne logika (lásd pl. `LinkButton.php`, `Menu.php` — üres konstruktortest, csak a `parent::__construct(...)` hívás) — ez az egyetlen módja annak, hogy a 3. fázisban a publish+restyle ténylegesen működjön.
-- Kategóriák jelenleg: `feedback`, `form`, `layout`, `typography`, `table` (üres, bővíthető).
+- Kategóriák jelenleg: `feedback`, `form`, `layout`, `menu`, `typography`, `table` (üres, bővíthető).
 - A csomag publish tag-jei: `blade-ui-views` → `resources/views/vendor/blade-ui`, `blade-ui-config` → `config/blade-ui.php`.
 - A projekt design tokenjei (`--color-primary`, `bg-gradient-hero`, `shadow-glow`, `font-display` stb.) a **fő projekt** `resources/css/app.css` fájljában, `@theme`/`@utility` blokkokban élnek — nem a csomagban.
 - Jelenleg vannak "nyers" sitebuild oldalak, amik még NEM blade-ui komponensekből épülnek: `resources/views/pages/*.blade.php`, saját `resources/views/components/layout.blade.php` + `resources/views/partials/{header,footer}.blade.php`. Ezek jó jelöltek/referenciák az átalakításra.
@@ -26,10 +26,10 @@ Ismétlődő workflow: egy sitebuildben (HTML + Tailwind, gyakran a végleges sz
 
 Cél: a sitebuild **tartalma és struktúrája** megjelenjen egy oldalon, de a csomag alap (nem sitebuild-specifikus) kinézetével.
 
-1. Térképezd fel a sitebuild HTML-jét szekciónként (hero, stat blokk, kártyák, form, footer stb.), és azonosítsd, melyik blade-ui komponens/layout felel meg neki (`layout.page`, `layout.card`, `layout.header`, `layout.footer`, `layout.main-menu`, `typography.h1`…`h6`, `typography.paragraph`, `form.form`, `form.fields.input` stb.).
+1. Térképezd fel a sitebuild HTML-jét szekciónként (hero, stat blokk, kártyák, form, footer stb.), és azonosítsd, melyik blade-ui komponens/layout felel meg neki (`layout.page`, `layout.card`, `layout.header`, `layout.footer`, `menu.header-menu`, `menu.footer-menu`, `menu.sidebar-menu`, `typography.h1`…`h6`, `typography.paragraph`, `form.form`, `form.fields.input` stb.).
 2. Emeld ki a valós szöveges tartalmat (címek, leírások, gombfeliratok, statisztikák) — ez megy bele a komponensek slotjaiba/propjaiba, NEM a design.
 3. Írd meg (vagy alakítsd át) a projekt oldalát ezekkel a komponensekkel, a `blade-ui` alapértelmezett (generikus) kinézetével — ez a köztes állapot még nem fog úgy kinézni, mint a sitebuild, és ez így helyes.
-4. Menük esetén ne írj statikus HTML `<a>` listát: a menüelemeket a fő projektben állítsd elő (pl. saját menü-forrásból) és add át `items` propként a `<x-ui::layout.main-menu :items="$items">` komponensnek (vagy `menuItems`/`footerMenuItems` propként a `layout-shell`/`header`/`footer` komponenseknek), hogy a menü adatvezérelt maradjon. A `blade-ui` csomag maga nem függ semmilyen menü-csomagtól.
+4. Menük esetén ne írj statikus HTML `<a>` listát: a `menu.header-menu`, `menu.footer-menu` és `menu.sidebar-menu` komponensek nem fogadnak `items` propot kívülről — mindegyik saját maga olvassa ki a menüjét a publikálható configból (`config('blade-ui.menus.main')`, `config('blade-ui.menus.footer')`, `config('blade-ui.menus.sidebar')`, ld. `Molitor\BladeUi\Support\MenuItem::collectionFromConfig()`). A menü szerkesztése tehát a publikált `config/blade-ui.php` `menus` tömbjének módosításával történik, nem propok átadásával. A `blade-ui` csomag maga nem függ semmilyen menü-csomagtól.
 
 ## 2. fázis — Hiányzó komponensek pótlása
 
@@ -72,6 +72,6 @@ Cél: a végeredmény pixelre a sitebuild designja legyen, de a Blade-struktúra
 - **Csomag = struktúra + generikus design.** Fő projekt (publikált nézetek) = az adott sitebuild konkrét kinézete.
 - Design token, márka-specifikus szín/gradiens/betűtípus soha ne kerüljön a `packages/blade-ui` alapértelmezett nézeteibe.
 - Új komponenst mindig a csomagban hozz létre, ne a fő projekt `resources/views`-ában — így a következő sitebuild is örökli.
-- Menü mindig kívülről átadott `items` prop + `<x-ui::layout.main-menu>`, sosem statikus HTML lista, és sosem menü-csomag közvetlen hivatkozása a csomagból.
+- Menü mindig a publikálható configból (`config('blade-ui.menus.*')`, `MenuItem::collectionFromConfig()`) jön a `menu.header-menu`/`menu.footer-menu`/`menu.sidebar-menu` komponensekben, sosem statikus HTML lista, propként átadott `items`, vagy menü-csomag közvetlen hivatkozása a csomagból.
 - Új komponens létrehozása előtt **mindig kérdezd meg a felhasználót**, hogy általános (csomagba) vagy projekt-specifikus (fő projektbe) legyen-e — ne döntsd el egyedül, még akkor sem, ha egyértelműnek tűnik.
 - **Minden csomagbeli komponensnek legyen PHP osztálya**, logika nélkül is — enélkül a publish+restyle (3. fázis) csendben nem működik. Lásd 0. pont.

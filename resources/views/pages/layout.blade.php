@@ -8,7 +8,7 @@
         <div>
             <p class="mb-3 text-sm font-semibold text-gray-500">&lt;x-ui::layout.header&gt;</p>
             <div class="overflow-hidden rounded-2xl border border-gray-200">
-                <x-ui::layout.header title="Demo App" logo-icon="sparkles" :items="$menuItems" />
+                <x-ui::layout.header />
             </div>
         </div>
 
@@ -76,7 +76,7 @@
         <div>
             <p class="mb-3 text-sm font-semibold text-gray-500">&lt;x-ui::layout.footer&gt;</p>
             <div class="overflow-hidden rounded-2xl border border-gray-200">
-                <x-ui::layout.footer title="Demo App" tagline="Rövid szlogen a láblécben." :items="$menuItems" />
+                <x-ui::layout.footer />
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@props(['title' => config('app.name', 'Laravel'), 'description' => null, 'menuItems' => [], 'footerItems' => []])
+@props(['title' => config('app.name', 'Laravel'), 'description' => null])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -15,12 +15,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body {{ $attributes->merge(['class' => 'bg-gray-50 text-gray-900 antialiased flex flex-col min-h-screen']) }}>
-    <x-ui::layout.header :items="$menuItems" />
+    <x-ui::layout.header />
 
     <main class="flex-1">
         {{ $slot }}
     </main>
 
-    <x-ui::layout.footer :items="$footerItems" />
+    <x-ui::layout.footer />
 </body>
 </html>

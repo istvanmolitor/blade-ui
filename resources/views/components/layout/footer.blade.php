@@ -1,54 +1,41 @@
-@props([
-    'title' => config('app.name', 'Laravel'),
-    'logoIcon' => null,
-    'tagline' => null,
-    'items' => [],
-    'text' => null,
-])
-
-<footer {{ $attributes->merge(['class' => 'border-t border-gray-100 bg-gray-50']) }}>
-    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
-        <div>
-            <x-ui::layout.logo :text="$title" :icon="$logoIcon" />
-            @if ($tagline)
-                <p class="mt-3 text-sm text-gray-500">{{ $tagline }}</p>
-            @endif
-        </div>
-
-        @if (count($items) > 0)
-            <div>
-                <h4 class="text-sm font-semibold text-gray-900">Oldalak</h4>
-                <ul class="mt-3 space-y-2 text-sm text-gray-500">
-                    @foreach ($items as $item)
-                        <li><a href="{{ $item->getUrl() ?? '#' }}" class="hover:text-indigo-600">{{ $item->getLabel() }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @if (config('blade-ui.phone') || config('blade-ui.email') || config('blade-ui.address'))
-            <div>
-                <h4 class="text-sm font-semibold text-gray-900">Kapcsolat</h4>
-                <ul class="mt-3 space-y-2 text-sm text-gray-500">
-                    @if (config('blade-ui.phone'))
-                        <li class="flex items-center gap-2"><x-ui::layout.icon name="phone" class="h-4 w-4 text-indigo-600" /> {{ config('blade-ui.phone') }}</li>
-                    @endif
-                    @if (config('blade-ui.email'))
-                        <li class="flex items-center gap-2"><x-ui::layout.icon name="mail" class="h-4 w-4 text-indigo-600" /> {{ config('blade-ui.email') }}</li>
-                    @endif
-                    @if (config('blade-ui.address'))
-                        <li class="flex items-center gap-2"><x-ui::layout.icon name="map-pin" class="h-4 w-4 text-indigo-600" /> {{ config('blade-ui.address') }}</li>
-                    @endif
-                </ul>
-            </div>
-        @endif
-
-        {{ $slot }}
+<footer class="bg-white text-slate-600 mt-auto border-t border-slate-100">
+    {{-- Content Region for custom footer content --}}
+    <div class="bg-slate-50 py-4">
+        @yield('footer')
     </div>
 
-    <div class="border-t border-gray-100">
-        <div class="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-gray-400 sm:px-6 lg:px-8">
-            {{ $text ?? '© '.date('Y').' '.$title }}
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            {{-- Brand Section --}}
+            <div>
+                <h3 class="text-slate-900 text-lg font-bold mb-4">{{ config('app.name', 'Cég Neve') }}</h3>
+                <p class="text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
+                    {{ config('blade-ui.footer_text') }}
+                </p>
+            </div>
+
+            {{-- Quick Links --}}
+            <div>
+                <h3 class="text-slate-900 text-sm font-bold uppercase tracking-wider mb-4">Linkek</h3>
+                <x-ui::menu.footer-menu />
+            </div>
+
+            {{-- Contact --}}
+            <div>
+                <h3 class="text-slate-900 text-sm font-bold uppercase tracking-wider mb-4">Kapcsolat</h3>
+                <p class="text-sm">{{ config('blade-ui.address') }}</p>
+                <p class="text-sm mt-1">{{ config('blade-ui.phone') }}</p>
+                <p class="text-sm mt-1">{{ config('blade-ui.email') }}</p>
+            </div>
+        </div>
+
+        {{-- Bottom Bar --}}
+        <div class="mt-12 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400">
+            <p>&copy; {{ date('Y') }} {{ config('app.name', 'Cég Neve') }}. Minden jog fenntartva.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-slate-600">Facebook</a>
+                <a href="#" class="hover:text-slate-600">Instagram</a>
+            </div>
         </div>
     </div>
 </footer>

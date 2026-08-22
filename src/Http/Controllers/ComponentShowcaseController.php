@@ -8,7 +8,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\MessageBag;
-use Molitor\BladeUi\Http\Controllers\Support\DemoMenuItem;
 
 class ComponentShowcaseController extends Controller
 {
@@ -83,15 +82,7 @@ class ComponentShowcaseController extends Controller
 
     public function layout(): View
     {
-        $menuItems = [
-            new DemoMenuItem('Kezdőlap', '#', active: true),
-            new DemoMenuItem('Szolgáltatások', '#'),
-            new DemoMenuItem('Kapcsolat', '#'),
-        ];
-
-        return view('blade-ui::pages.layout', [
-            'menuItems' => $menuItems,
-        ]);
+        return view('blade-ui::pages.layout');
     }
 
     public function list(): View

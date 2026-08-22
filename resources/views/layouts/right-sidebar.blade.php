@@ -1,15 +1,15 @@
 @extends('blade-ui::layouts.base')
 
 @section('body')
-    <x-ui::layout.layout-shell :menu-items="$menuItems ?? []" :footer-menu-items="$footerMenuItems ?? []">
+    <x-ui::layout.layout-shell>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <x-ui::page-shell>
                 <div class="flex flex-col lg:flex-row gap-8">
                     <div class="w-full lg:w-3/4">
-                        <x-ui::layout.partials.main />
+                        <x-ui::layout.main />
                     </div>
                     <div class="w-full lg:w-1/4">
-                        <x-ui::layout.partials.sidebar />
+                        <x-ui::layout.sidebar />
                     </div>
                 </div>
             </x-ui::page-shell>

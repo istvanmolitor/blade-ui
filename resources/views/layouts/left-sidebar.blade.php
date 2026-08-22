@@ -6,10 +6,10 @@
             <x-ui::page-shell>
                 <div class="flex flex-col lg:flex-row gap-8">
                     <div class="w-full lg:w-1/4">
-                        <x-ui::layout.partials.sidebar />
+                        <x-ui::layout.sidebar />
                     </div>
                     <div class="w-full lg:w-3/4">
-                        <x-ui::layout.partials.main />
+                        <x-ui::layout.main />
                     </div>
                 </div>
             </x-ui::page-shell>

@@ -1,10 +1,5 @@
-@props(['text' => config('app.name', 'Laravel'), 'href' => '/', 'icon' => null])
-
-<a href="{{ $href }}" {{ $attributes->merge(['class' => 'flex items-center gap-2 text-lg font-bold text-gray-800 no-underline hover:text-gray-900']) }}>
-    @if ($icon)
-        <span class="grid h-9 w-9 place-items-center rounded-xl bg-indigo-600 text-white">
-            <x-ui::layout.icon :name="$icon" class="h-5 w-5" />
-        </span>
-    @endif
-    <span>{{ $text }}</span>
-</a>
+<div class="flex-shrink-0 flex items-center">
+    <a href="/" class="text-xl font-semibold tracking-tight text-indigo-600 hover:text-indigo-500 transition-colors">
+        <span class="bg-indigo-600 text-white px-2 py-1 rounded mr-1">M</span>{{ config('app.name', 'Molitor') }}
+    </a>
+</div>
