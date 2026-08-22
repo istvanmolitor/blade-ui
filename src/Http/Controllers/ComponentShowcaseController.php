@@ -76,6 +76,11 @@ class ComponentShowcaseController extends Controller
         return view('blade-ui::pages.list');
     }
 
+    public function table(): View
+    {
+        return view('blade-ui::pages.table');
+    }
+
     public function typography(): View
     {
         return view('blade-ui::pages.typography');

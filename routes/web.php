@@ -13,4 +13,5 @@ Route::get('/feedback', [ComponentShowcaseController::class, 'feedback'])->name(
 Route::get('/form', [ComponentShowcaseController::class, 'form'])->name('form');
 Route::get('/layout', [ComponentShowcaseController::class, 'layout'])->name('layout');
 Route::get('/list', [ComponentShowcaseController::class, 'list'])->name('list');
+Route::get('/table', [ComponentShowcaseController::class, 'table'])->name('table');
 Route::get('/typography', [ComponentShowcaseController::class, 'typography'])->name('typography');

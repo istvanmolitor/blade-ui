@@ -26,6 +26,7 @@ return [
         'blade-ui.showcase.form' => 'Űrlapok',
         'blade-ui.showcase.layout' => 'Layout',
         'blade-ui.showcase.list' => 'Listák',
+        'blade-ui.showcase.table' => 'Táblázatok',
         'blade-ui.showcase.typography' => 'Tipográfia',
     ],
 

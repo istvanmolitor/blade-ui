@@ -16,7 +16,7 @@
             Ez egy bekezdés szöveg, amely bemutatja a <strong>paragraph</strong> komponens alapértelmezett stílusát.
         </x-ui::typography.paragraph>
 
-        <x-ui::typography.list :items="['Első listaelem', 'Második listaelem', 'Harmadik listaelem']" />
+        <x-ui::typography.unordered-list :items="['Első listaelem', 'Második listaelem', 'Harmadik listaelem']" />
 
         <x-ui::typography.quote author="Kovács János">
             Ez egy idézet, amely a quote komponenst mutatja be.
