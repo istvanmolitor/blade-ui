@@ -12,31 +12,17 @@ use Illuminate\Support\MessageBag;
 class ComponentShowcaseController extends Controller
 {
     /**
-     * @var array<string, string>
-     */
-    private const SECTIONS = [
-        'blade-ui.showcase.alerts' => 'Alertek',
-        'blade-ui.showcase.buttons' => 'Gombok',
-        'blade-ui.showcase.card' => 'Kártyák',
-        'blade-ui.showcase.feedback' => 'Visszajelzések',
-        'blade-ui.showcase.form' => 'Űrlapok',
-        'blade-ui.showcase.layout' => 'Layout',
-        'blade-ui.showcase.list' => 'Listák',
-        'blade-ui.showcase.typography' => 'Tipográfia',
-    ];
-
-    /**
      * @return array<string, string>
      */
     public static function sections(): array
     {
-        return self::SECTIONS;
+        return config('blade-ui.showcase_sections', []);
     }
 
     public function index(): View
     {
         return view('blade-ui::pages.index', [
-            'sections' => self::SECTIONS,
+            'sections' => self::sections(),
         ]);
     }
 

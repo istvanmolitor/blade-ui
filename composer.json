@@ -17,10 +17,7 @@
     "autoload": {
         "psr-4": {
             "Molitor\\BladeUi\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {
