@@ -19,9 +19,11 @@ return [
      * Used to build both the showcase index cards and the demo sidebar menu.
      */
     'showcase_sections' => [
+        'blade-ui.showcase.accordion' => 'Harmonika',
         'blade-ui.showcase.alerts' => 'Alertek',
         'blade-ui.showcase.buttons' => 'Gombok',
         'blade-ui.showcase.card' => 'Kártyák',
+        'blade-ui.showcase.elements' => 'Elemek',
         'blade-ui.showcase.feedback' => 'Visszajelzések',
         'blade-ui.showcase.form' => 'Űrlapok',
         'blade-ui.showcase.icons' => 'Ikonok',

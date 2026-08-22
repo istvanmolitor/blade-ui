@@ -6,6 +6,6 @@
     @endif
     <h2 class="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">{{ $slot }}</h2>
     @if ($description)
-        <p class="mt-3 text-gray-600">{{ $description }}</p>
+        <p class="mt-3 mb-6 text-gray-600">{{ $description }}</p>
     @endif
 </div>

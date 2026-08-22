@@ -28,6 +28,11 @@ class ComponentShowcaseController extends Controller
         ]);
     }
 
+    public function accordion(): View
+    {
+        return view('blade-ui::pages.accordion');
+    }
+
     public function alerts(): View
     {
         return view('blade-ui::pages.alerts');
@@ -41,6 +46,11 @@ class ComponentShowcaseController extends Controller
     public function card(): View
     {
         return view('blade-ui::pages.card');
+    }
+
+    public function elements(): View
+    {
+        return view('blade-ui::pages.elements');
     }
 
     public function feedback(): View
