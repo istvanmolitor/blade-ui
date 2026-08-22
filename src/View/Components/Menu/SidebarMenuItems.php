@@ -7,7 +7,7 @@ namespace Molitor\BladeUi\View\Components\Menu;
 use Molitor\BladeUi\Support\MenuItem;
 use Molitor\BladeUi\View\Components\Component;
 
-class FooterMenu extends Component
+class SidebarMenuItems extends Component
 {
     /**
      * @param  array<int, MenuItem>  $items
@@ -16,6 +16,6 @@ class FooterMenu extends Component
         public array $items,
         public int $depth = 0,
     ) {
-        parent::__construct('components.menu.footer-menu');
+        parent::__construct('components.menu.sidebar-menu-items');
     }
 }

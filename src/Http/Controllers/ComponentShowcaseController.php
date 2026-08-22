@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\MessageBag;
 use Molitor\BladeUi\Services\IconService;
+use Molitor\BladeUi\Support\MenuItem;
 
 class ComponentShowcaseController extends Controller
 {
@@ -91,6 +92,66 @@ class ComponentShowcaseController extends Controller
     public function list(): View
     {
         return view('blade-ui::pages.list');
+    }
+
+    public function menu(): View
+    {
+        $items = MenuItem::collectionFromArray([
+            ['label' => 'Kezdőlap', 'url' => '#', 'icon' => 'home', 'active' => true],
+            [
+                'label' => 'Szolgáltatások',
+                'url' => '#',
+                'icon' => 'briefcase',
+                'children' => [
+                    ['label' => 'Webfejlesztés', 'url' => '#', 'icon' => 'code'],
+                    ['label' => 'Tanácsadás', 'url' => '#', 'icon' => 'message-circle'],
+                    [
+                        'label' => 'Karbantartás',
+                        'url' => '#',
+                        'icon' => 'wrench',
+                        'children' => [
+                            ['label' => 'Havi csomag', 'url' => '#'],
+                            ['label' => 'Eseti javítás', 'url' => '#'],
+                        ],
+                    ],
+                ],
+            ],
+            ['label' => 'Rólunk', 'url' => '#', 'icon' => 'users'],
+            ['label' => 'Kapcsolat', 'url' => '#', 'icon' => 'mail'],
+        ]);
+
+        $sidebarItems = MenuItem::collectionFromArray([
+            ['label' => 'Áttekintés', 'url' => '#', 'icon' => 'layout-dashboard', 'active' => true],
+            [
+                'label' => 'Beállítások',
+                'url' => '#',
+                'icon' => 'settings',
+                'children' => [
+                    ['label' => 'Profil', 'url' => '#', 'icon' => 'user'],
+                    ['label' => 'Biztonság', 'url' => '#', 'icon' => 'shield'],
+                    ['label' => 'Értesítések', 'url' => '#', 'icon' => 'bell'],
+                ],
+            ],
+            ['label' => 'Számlázás', 'url' => '#', 'icon' => 'credit-card'],
+        ]);
+
+        $footerItems = MenuItem::collectionFromArray([
+            ['label' => 'Rólunk', 'url' => '#', 'icon' => 'info'],
+            [
+                'label' => 'Jogi',
+                'url' => '#',
+                'children' => [
+                    ['label' => 'Adatvédelem', 'url' => '#'],
+                    ['label' => 'ÁSZF', 'url' => '#'],
+                ],
+            ],
+        ]);
+
+        return view('blade-ui::pages.menu', [
+            'items' => $items,
+            'sidebarItems' => $sidebarItems,
+            'footerItems' => $footerItems,
+        ]);
     }
 
     public function table(): View

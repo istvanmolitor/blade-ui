@@ -1,7 +1,7 @@
 @extends('blade-ui::layouts.demo')
 
 @section('title', 'Listák')
-@section('description', 'components/list &mdash; checklist és lépés (step) listák.')
+@section('description', 'components/list &mdash; checklist, lépés (step), leírás (description) és elem (item) listák.')
 
 @section('content')
     <div class="grid gap-10 sm:grid-cols-2">
@@ -33,6 +33,34 @@
                     Használat
                 </x-ui::list.step>
             </x-ui::list.steps>
+        </div>
+
+        <div>
+            <p class="mb-3 text-sm font-semibold text-gray-500">&lt;x-ui::list.description-list&gt; / &lt;x-ui::list.description-item&gt;</p>
+            <x-ui::list.description-list>
+                <x-ui::list.description-item term="Terv">Pro</x-ui::list.description-item>
+                <x-ui::list.description-item term="Ár">9 990 Ft / hó</x-ui::list.description-item>
+                <x-ui::list.description-item term="Következő számlázás">2026. 09. 22.</x-ui::list.description-item>
+                <x-ui::list.description-item term="Állapot">Aktív</x-ui::list.description-item>
+            </x-ui::list.description-list>
+        </div>
+
+        <div>
+            <p class="mb-3 text-sm font-semibold text-gray-500">&lt;x-ui::list.item-list&gt; / &lt;x-ui::list.item&gt;</p>
+            <x-ui::list.item-list>
+                <x-ui::list.item icon="user" description="kovacs.janos@example.com">
+                    Kovács János
+                    <x-slot:trailing>
+                        <span class="rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700">Aktív</span>
+                    </x-slot:trailing>
+                </x-ui::list.item>
+                <x-ui::list.item icon="user" description="nagy.eva@example.com">
+                    Nagy Éva
+                    <x-slot:trailing>
+                        <span class="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">Meghívva</span>
+                    </x-slot:trailing>
+                </x-ui::list.item>
+            </x-ui::list.item-list>
         </div>
     </div>
 @endsection

@@ -3,25 +3,23 @@
 <nav class="hidden md:flex space-x-8">
     <ul class="list-none m-0 p-0 flex items-center gap-8">
         @foreach ($items as $item)
-        @php($children = $item->getMenuItems())
-        <li class="relative group">
-            <a href="{{ $item->getUrl() ?? '#' }}" @if (count($children)> 0)
+        @php($hasChildren = $item->hasChildren())
+        <li class="group relative">
+            <a href="{{ $item->getUrl() }}" @if ($hasChildren)
                 onclick="event.preventDefault(); this.parentElement.querySelector(':scope > ul')?.classList.toggle('hidden');"
                 @endif
                 class="{{ $item->isActive() ? 'inline-flex items-center gap-1 text-indigo-600 font-medium border-b-2 border-indigo-600 pb-1' : 'inline-flex items-center gap-1 text-gray-600 hover:text-indigo-600 transition-colors' }}">
+                @if ($item->getIcon())
+                    <x-ui::layout.icon :name="$item->getIcon()" class="h-4 w-4" />
+                @endif
                 {{ $item->getLabel() }}
+                @if ($hasChildren)
+                    <x-ui::layout.icon name="chevron-down" class="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                @endif
             </a>
 
-            @if (count($children) > 0)
-            <ul class="list-none m-0 absolute left-0 top-full z-50 hidden w-56 space-y-1 rounded-md border border-gray-100 bg-white p-2 shadow-lg group-hover:block group-focus-within:block">
-                @foreach ($children as $child)
-                <li>
-                    <a href="{{ $child->getUrl() ?? '#' }}" class="{{ $child->isActive() ? 'block rounded-md bg-indigo-50 px-3 py-2 text-indigo-600 font-medium' : 'block rounded-md px-3 py-2 text-gray-700 hover:bg-gray-50 hover:text-indigo-600 transition-colors' }}">
-                        {{ $child->getLabel() }}
-                    </a>
-                </li>
-                @endforeach
-            </ul>
+            @if ($hasChildren)
+                <x-ui::menu.dropdown :items="$item->getMenuItems()" />
             @endif
         </li>
         @endforeach
