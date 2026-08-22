@@ -24,6 +24,7 @@ return [
         'blade-ui.showcase.card' => 'Kártyák',
         'blade-ui.showcase.feedback' => 'Visszajelzések',
         'blade-ui.showcase.form' => 'Űrlapok',
+        'blade-ui.showcase.icons' => 'Ikonok',
         'blade-ui.showcase.layout' => 'Layout',
         'blade-ui.showcase.list' => 'Listák',
         'blade-ui.showcase.table' => 'Táblázatok',

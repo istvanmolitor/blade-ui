@@ -11,6 +11,8 @@ Route::get('/buttons', [ComponentShowcaseController::class, 'buttons'])->name('b
 Route::get('/card', [ComponentShowcaseController::class, 'card'])->name('card');
 Route::get('/feedback', [ComponentShowcaseController::class, 'feedback'])->name('feedback');
 Route::get('/form', [ComponentShowcaseController::class, 'form'])->name('form');
+Route::get('/icons', [ComponentShowcaseController::class, 'icons'])->name('icons');
+Route::get('/icons/{name}', [ComponentShowcaseController::class, 'icon'])->name('icons.show');
 Route::get('/layout', [ComponentShowcaseController::class, 'layout'])->name('layout');
 Route::get('/list', [ComponentShowcaseController::class, 'list'])->name('list');
 Route::get('/table', [ComponentShowcaseController::class, 'table'])->name('table');

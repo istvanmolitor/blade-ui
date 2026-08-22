@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\MessageBag;
+use Molitor\BladeUi\Services\IconService;
 
 class ComponentShowcaseController extends Controller
 {
@@ -63,6 +64,22 @@ class ComponentShowcaseController extends Controller
                 'de' => 'Németország',
                 'at' => 'Ausztria',
             ],
+        ]);
+    }
+
+    public function icons(IconService $icons): View
+    {
+        return view('blade-ui::pages.icons', [
+            'icons' => $icons->names(),
+        ]);
+    }
+
+    public function icon(string $name, IconService $icons): View
+    {
+        abort_unless(in_array($name, $icons->names(), true), 404);
+
+        return view('blade-ui::pages.icon-show', [
+            'icon' => $name,
         ]);
     }
 

@@ -10,7 +10,7 @@
                 ->map(fn (string $label, string $route) => [
                     'label' => $label,
                     'url' => route($route),
-                    'active' => request()->routeIs($route),
+                    'active' => request()->routeIs($route) || request()->routeIs("{$route}.*"),
                 ])
                 ->values()
                 ->all()
